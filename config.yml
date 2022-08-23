@@ -11,7 +11,7 @@ log:
 
 db:
   name: go-micro-example-db
-  host: localhost
+  host: pg.micro
   port: 5432
   user: postgres
   pass: postgres
@@ -22,7 +22,7 @@ db:
     maxSize: 3
 
 rabbitmq:
-  host: localhost
+  host: rabbitmq.micro
   port: 5672
   user: guest
   pass: guest

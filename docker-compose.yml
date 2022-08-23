@@ -1,6 +1,16 @@
 version: '3'
 services:
+  app:
+    build:
+      context: .
+    container_name: 'app.micro'
+    depends_on:
+      - postgres
+      - rabbitmq
+    image: go-micro-example:local
+
   postgres:
+    container_name: 'pg.micro'
     image: postgres
     hostname: postgres
     ports:
@@ -11,18 +21,19 @@ services:
       POSTGRES_DB: go-micro-example-db
 
   pgadmin:
+    container_name: 'pg-admin.micro'
     image: dpage/pgadmin4
     depends_on:
       - postgres
     ports:
-      - "9090:80"
+      - "7080:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: oz@oz.com
       PGADMIN_DEFAULT_PASSWORD: oz
 
   rabbitmq:
     image: rabbitmq:3.9-management-alpine
-    container_name: 'rabbitmq'
+    container_name: 'rabbitmq.micro'
     ports:
       - 5672:5672
       - 15672:15672
